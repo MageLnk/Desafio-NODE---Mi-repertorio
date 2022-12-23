@@ -20,4 +20,13 @@ const deletingData = (paramsId) => {
   fs.writeFileSync(`./public/repertorio.json`, JSON.stringify(filteringData));
 };
 
-module.exports = { createFile, readFile, deletingData };
+const updatingData = (paramsId, body) => {
+  let newArray = readFile();
+  let findData = newArray.findIndex((result) => result.id === +paramsId);
+  newArray[findData].titulo = body.titulo;
+  newArray[findData].artista = body.artista;
+  newArray[findData].tono = body.tono;
+  fs.writeFileSync(`./public/repertorio.json`, JSON.stringify(newArray));
+};
+
+module.exports = { createFile, readFile, deletingData, updatingData };
