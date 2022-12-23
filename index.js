@@ -4,11 +4,18 @@ const cors = require("cors");
 const app = express();
 const PORT = 5000;
 // Middleware
-//app.use(bodyParser.json());
 app.use(cors());
+app.use(express.json());
+// Tools
+const { readFile } = require("./tools/operations");
 // App
 app.get("/", (req, res) => {
-  res.sendFile(`${__dirname}/public/index.html`);
+  res.status(200).sendFile(`${__dirname}/public/index.html`);
+});
+
+app.get("/canciones", (req, res) => {
+  const getAllSongs = readFile();
+  res.status(200).send(getAllSongs);
 });
 
 // Listener
