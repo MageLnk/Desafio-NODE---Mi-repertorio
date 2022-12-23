@@ -15,4 +15,9 @@ const createFile = ({ id, titulo, artista, tono }) => {
   fs.writeFileSync(`./public/repertorio.json`, JSON.stringify(actualDB));
 };
 
-module.exports = { createFile, readFile };
+const deletingData = (paramsId) => {
+  const filteringData = readFile().filter((filterSong) => filterSong.id != paramsId);
+  fs.writeFileSync(`./public/repertorio.json`, JSON.stringify(filteringData));
+};
+
+module.exports = { createFile, readFile, deletingData };
